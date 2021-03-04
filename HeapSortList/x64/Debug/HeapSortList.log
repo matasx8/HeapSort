@@ -1,0 +1,3 @@
+﻿  main.cpp
+C:\Users\mtunk\source\repos\HeapSort\HeapSortList\main.cpp(117,35): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  HeapSortList.vcxproj -> C:\Users\mtunk\source\repos\HeapSort\x64\Debug\HeapSortList.exe

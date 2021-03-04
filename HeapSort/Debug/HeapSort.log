@@ -1,3 +1,4 @@
 ﻿  main.cpp
 C:\Users\mtunk\source\repos\HeapSort\HeapSort\main.cpp(68,19): warning C4244: 'argument': conversion from 'std::streamoff' to 'const unsigned int', possible loss of data
+  LINK : C:\Users\mtunk\source\repos\HeapSort\Debug\HeapSort.exe not found or not built by the last incremental link; performing full link
   HeapSort.vcxproj -> C:\Users\mtunk\source\repos\HeapSort\Debug\HeapSort.exe

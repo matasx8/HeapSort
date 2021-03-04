@@ -1,8 +1,30 @@
+//Heap Sort, char, linked list
+//Reminder: ask someone who is experienced with C++ the situation with precalculating it in heapify method
+
 #include <iostream>
 #include <vector>
+#include <list>
 #include <fstream>
 
-void heapify(std::vector<char>& vec, int n, int i)
+struct node
+{
+    char val;
+    node* parent;
+    node* left;
+    node* right;
+};
+
+
+void print(std::list<char>* vec)
+{
+    for (auto& i : *vec)
+    {
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
+void heapify(std::list<char>& lst, int n, int i)
 {
 
     int largest = i; // Initialize largest as root
@@ -10,24 +32,27 @@ void heapify(std::vector<char>& vec, int n, int i)
     int r = 2 * i + 2; // right = 2*i + 2
 
     // If left child is larger than root
-    if (l < n && vec[l] > vec[largest])
+    if (l < n && *std::next(lst.begin(), l) > *std::next(lst.begin(), largest))
+    {
         largest = l;
+    }
 
     // If right child is larger than largest so far
-    if (r < n && vec[r] >vec[largest])
+    if (r < n && *std::next(lst.begin(), r) > *std::next(lst.begin(), largest))
+    {
         largest = r;
+    }
 
     // If largest is not root
     if (largest != i) {
-        std::swap(vec[i], vec[largest]);
-
+        std::swap(*std::next(lst.begin(), i), *std::next(lst.begin(), largest));
         // Recursively heapify the affected sub-tree
-        heapify(vec, n, largest);
+        heapify(lst, n, largest);
     }
 }
 
 // main function to do heap sort
-void heapSort(std::vector<char>& arr, int n)
+void heapSort(std::list<char>& arr, int n)
 {
     // Build heap (rearrange array)
     for (int i = n / 2 - 1; i >= 0; i--)
@@ -37,24 +62,32 @@ void heapSort(std::vector<char>& arr, int n)
     for (int i = n - 1; i > 0; i--)
     {
         // Move current root to end
-        std::swap(arr[0], arr[i]);
+        std::swap(*arr.begin(), *std::next(arr.begin(), i));
 
         // call max heapify on the reduced heap
         heapify(arr, i, 0);
     }
 }
 
-void print(std::vector<char>* vec)
+node* fillTree(node* root, std::vector<char>& data, int i, int n)
 {
-    for (auto& i : *vec)
+    if (i < n)
     {
-        printf("%d ", i);
+        node* temp = new node{ data[i], root, nullptr, nullptr };
+        root = temp;
+
+        //insert left child
+        root->left = fillTree(root->left, data, 2 * i + 1, n);
+
+        //insert right child
+        root->right = fillTree(root->right, data, 2 * i + 2, n);
     }
-    printf("\n");
+    return root;
 }
 
-void read(std::vector<char>* data, const char* filename)
+void read(std::list<char>* data, const char* filename)
 {
+
     // open the file:
     std::ifstream file(filename, std::ios::binary);
 
@@ -65,18 +98,17 @@ void read(std::vector<char>* data, const char* filename)
     fileSize = file.tellg();
     file.seekg(0, std::ios::beg);
 
-    data->reserve(fileSize);
-
     // read the data:
     data->insert(data->begin(),
         std::istream_iterator<char>(file),
         std::istream_iterator<char>());
+
     file.close();
 }
 
 int main()
 {
-    std::vector<char>* input = new std::vector<char>();
+    std::list<char>* input = new std::list<char>();
     read(input, "../Inputs/Input4.bin");
     heapSort(*input, input->size());
     print(input);

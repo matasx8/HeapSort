@@ -2,6 +2,16 @@
 #include <vector>
 #include <fstream>
 
+
+void print(std::vector<char>* vec)
+{
+    for (auto& i : *vec)
+    {
+        printf("%d ", i);
+    }
+    printf("\n");
+}
+
 void heapify(std::vector<char>& vec, int n, int i)
 {
 
@@ -44,15 +54,6 @@ void heapSort(std::vector<char>& arr, int n)
     }
 }
 
-void print(std::vector<char>* vec)
-{
-    for (auto& i : *vec)
-    {
-        printf("%d ", i);
-    }
-    printf("\n");
-}
-
 void read(std::vector<char>* data, const char* filename)
 {
     // open the file:
@@ -77,7 +78,7 @@ void read(std::vector<char>* data, const char* filename)
 int main()
 {
     std::vector<char>* input = new std::vector<char>();
-    read(input, "../Inputs/Input4.bin");
+    read(input, "../Inputs/Input1.bin");
     heapSort(*input, input->size());
     print(input);
 	return 0;
