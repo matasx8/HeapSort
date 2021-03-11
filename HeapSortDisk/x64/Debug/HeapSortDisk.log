@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(18,22): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(19,22): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(21,22): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(22,22): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(34,20): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(35,26): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(39,20): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(40,26): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(65,24): warning C4267: 'argument': conversion from 'size_t' to 'std::ios_base::seekdir', possible loss of data
+  HeapSortDisk.vcxproj -> C:\Users\mtunk\source\repos\HeapSort\x64\Debug\HeapSortDisk.exe

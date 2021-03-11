@@ -1,0 +1,5 @@
+﻿  main.cpp
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(120,24): warning C4244: 'argument': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(123,20): warning C4244: 'argument': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortDisk\main.cpp(124,24): warning C4244: 'argument': conversion from 'std::streamoff' to 'int', possible loss of data
+  HeapSortDisk.vcxproj -> C:\Users\mtunk\source\repos\HeapSort\Debug\HeapSortDisk.exe
