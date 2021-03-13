@@ -1,1 +1,1 @@
-py "GenerateDecimalData.py"
+py "GenerateData.py"

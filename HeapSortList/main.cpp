@@ -1,5 +1,4 @@
 //Heap Sort, char, linked list
-//Reminder: ask someone who is experienced with C++ the situation with precalculating it in heapify method
 
 #include <iostream>
 #include <vector>
