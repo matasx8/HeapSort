@@ -1,7 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <chrono>
 
+size_t comparisons = 0;
+size_t swaps = 0;
 
 void print(std::vector<char>* vec)
 {
@@ -21,15 +24,22 @@ void heapify(std::vector<char>& vec, int n, int i)
 
     // If left child is larger than root
     if (l < n && vec[l] > vec[largest])
+    {
         largest = l;
+    }
+    comparisons++;
 
     // If right child is larger than largest so far
     if (r < n && vec[r] >vec[largest])
+    {
         largest = r;
+    }
+    comparisons++;
 
     // If largest is not root
     if (largest != i) {
         std::swap(vec[i], vec[largest]);
+        swaps++;
 
         // Recursively heapify the affected sub-tree
         heapify(vec, n, largest);
@@ -78,8 +88,17 @@ void read(std::vector<char>* data, const char* filename)
 int main()
 {
     std::vector<char>* input = new std::vector<char>();
-    read(input, "../Inputs/Input1.bin");
+    read(input, "../Inputs/Input5.bin");
+
+    auto start = std::chrono::high_resolution_clock::now();
+
     heapSort(*input, input->size());
-    print(input);
+
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+   // print(input);
+    std::cout << "\nIt took me " << time_span.count() << " seconds.";
+    std::cout << "\nswaps " << swaps;
+    std::cout << "\ncomparisons " << comparisons << " seconds.";
 	return 0;
 }

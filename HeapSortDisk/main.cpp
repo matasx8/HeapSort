@@ -2,6 +2,10 @@
 #include <vector>
 #include <fstream>
 #include <assert.h>
+#include <chrono>
+
+size_t comparisons = 0;
+size_t swaps = 0;
 
 
 void print(std::vector<char>* vec)
@@ -15,6 +19,7 @@ void print(std::vector<char>* vec)
 
 void swap(std::fstream& file, int lhs, int rhs)
 {
+    swaps++;
     char pl, pr;//something wrong
     file.seekg(lhs).get(pl);
     file.seekg(rhs).get(pr);
@@ -39,6 +44,7 @@ void heapify(std::fstream& file, int n, int i)
            
         if (cl > clargest)
             largest = l;
+        comparisons++;
     }
 
     if (r < n)
@@ -49,6 +55,7 @@ void heapify(std::fstream& file, int n, int i)
         // If right child is larger than largest so far
         if (ccl > cclargest)
             largest = r;
+        comparisons++;
     }
 
     // If largest is not root
@@ -98,7 +105,7 @@ void readAndWrite(std::fstream& file, int n)
 
 int main()
 {
-    const char* filename = "../Inputs/Input7.bin";
+    const char* filename = "../Inputs/Input5.bin";
 
     // open the file:
     std::fstream file;
@@ -117,11 +124,18 @@ int main()
         std::cout << "Couldnt open file " << filename << "\n";
     }
 
-    readAndWrite(file, fileSize);
+    //readAndWrite(file, fileSize);
     std::cout << "\nSorted ->\n";
     file.seekg(0, std::ios::beg);
+
+    auto start = std::chrono::high_resolution_clock::now();
     heapSort(file, fileSize);
-    readAndWrite(file, fileSize);
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
+    //readAndWrite(file, fileSize);
+    std::cout << "\nIt took me " << time_span.count() << " seconds.";
+    std::cout << "\nswaps " << swaps;
+    std::cout << "\ncomparisons " << comparisons << " seconds.";
   //  print(input);
     return 0;
 }

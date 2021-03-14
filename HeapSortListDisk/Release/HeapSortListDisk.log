@@ -1,0 +1,11 @@
+﻿  main.cpp
+C:\Users\mtunk\source\repos\HeapSort\HeapSortListDisk\main.cpp(76,21): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortListDisk\main.cpp(105,21): warning C4244: 'initializing': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortListDisk\main.cpp(254,39): warning C4244: 'argument': conversion from 'std::streamoff' to 'int', possible loss of data
+C:\Users\mtunk\source\repos\HeapSort\HeapSortListDisk\main.cpp(265,24): warning C4244: 'argument': conversion from 'std::streamoff' to 'int', possible loss of data
+  Generating code
+  3 of 160 functions ( 1.9%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  HeapSortListDisk.vcxproj -> C:\Users\mtunk\source\repos\HeapSort\Release\HeapSortListDisk.exe

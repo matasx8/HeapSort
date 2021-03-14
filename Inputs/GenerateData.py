@@ -11,18 +11,22 @@ import collections
 size = input("Enter your type size in bytes: ")
 file_count = input("Enter how many different files you want: ")
 
+n = 1000
+
 #generating data for any type for regular arrays
 for i in range(1, int(file_count)):
     file = open(f'Input{i}.bin', "wb")
-    for i in range(1, random.randint(10, 10000)):
-        file.write(struct.pack("d", random.random()))#writes random data, c++ will read bytes and interpret as chars which will still be random
+    n *= 2
+    for i in range(0, n):
+        file.write(struct.pack("B", random.randrange(0, 255)))#writes random data, c++ will read bytes and interpret as chars which will still be random
     file.close()
 
 #generating data for sorting binary file that acts like a linked list
+nr_of_nodes = 101
 for i in range(1, int(file_count) + 1):
     file = open(f'InputList{i}.bin', "wb")
 
-    nr_of_nodes = 11
+    nr_of_nodes = (nr_of_nodes - 1) * 2 + 1
     for i in range(1, nr_of_nodes + 1):
         if i % 2 == 0:
             file.write(struct.pack("i", i))

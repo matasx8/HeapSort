@@ -2,6 +2,10 @@
 #include <vector>
 #include <fstream>
 #include <assert.h>
+#include <chrono>
+
+size_t comparisons = 0;
+size_t swaps = 0;
 
 struct Node
 {
@@ -15,12 +19,14 @@ void readNode(std::fstream& file, Node& node)
     //today I learned that sizeof(Node) != 9, because there's padding
     char c[sizeof(int) + sizeof(char) + sizeof(int)];
     char* buffer = c;
-    file.read(buffer, sizeof(int) + sizeof(char) + sizeof(int));
-    node.adress = (int)*buffer;
-    buffer += sizeof(int);
-    node.value = (char)*buffer;
-    buffer += sizeof(char);
-    node.pointer = (int)*buffer;
+    file.read(buffer, (sizeof(int) + sizeof(char) + sizeof(int)));
+    unsigned char* ubuff = (unsigned char*)c;
+    //works for big-endian or little-endian architectures
+    node.adress = ubuff[0] | (ubuff[1] << 8) | (ubuff[2] << 16) | (ubuff[3] << 24);
+    ubuff += sizeof(int);
+    node.value = (char)*ubuff;
+    ubuff += sizeof(char);
+    node.pointer = ubuff[0] | (ubuff[1] << 8) | (ubuff[2] << 16) | (ubuff[3] << 24);
 }
 
 void readAndWriteFullDebug(std::fstream& file, int n)
@@ -48,7 +54,7 @@ void readAndWriteDebug(std::fstream& file, int n)
         readNode(file, node);
         if (file.fail())
             assert(false);
-        printf("%d %d %d\n", node.adress, node.value, node.pointer);
+        printf("%i %d %d\n", node.adress, node.value, node.pointer);
     }
 }
 
@@ -117,6 +123,7 @@ void print(std::vector<char>* vec)
 
 void swap(std::fstream& file, int lhs, int rhs)
 {
+    swaps++;
     Node pl, pr;
     setSeekg(file, lhs);
     readNode(file, pl);
@@ -149,6 +156,7 @@ void heapify(std::fstream& file, int n, int i)
 
         if (cl.value > clargest.value)
             largest = l;
+        comparisons++;
     }
 
     if (r < n)
@@ -162,6 +170,7 @@ void heapify(std::fstream& file, int n, int i)
         // If right child is larger than largest so far
         if (ccl.value > cclargest.value)
             largest = r;
+        comparisons++;
     }
 
     // If largest is not root
@@ -219,7 +228,7 @@ int readAndWrite(std::fstream& file, int n)
 
 int main()
 {
-    const char* filename = "../Inputs/InputList4.bin";
+    const char* filename = "../Inputs/InputList5.bin";
 
     // open the file:
     std::fstream file;
@@ -241,13 +250,23 @@ int main()
     //When linked list is imitated in binary memory we must know it's memory adress. I'm going to assume it's
     //always going to be the first element with adress 0x01 
     //we als must know how many elements it contains
-
+    //readAndWriteDebug(file, fileSize);
     int elements = readAndWrite(file, fileSize);
-   // readAndWriteDebug(file, fileSize);
     std::cout << "\nSorted ->\n";
     file.seekg(0, std::ios::beg);
+
+    auto start = std::chrono::high_resolution_clock::now();
+
     heapSort(file,elements);
+
+    auto end = std::chrono::high_resolution_clock::now();
+
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
     readAndWrite(file, fileSize);
+    std::cout << "\nIt took me " << time_span.count() << " seconds.";
+    std::cout << "\nswaps " << swaps;
+    std::cout << "\ncomparisons " << comparisons;
+    std::cout << "\nelements " << elements;
     //  print(input);
     return 0;
 }

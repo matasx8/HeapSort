@@ -4,6 +4,10 @@
 #include <vector>
 #include <list>
 #include <fstream>
+#include <chrono>
+
+size_t comparisons = 0;
+size_t swaps = 0;
 
 struct node
 {
@@ -35,16 +39,19 @@ void heapify(std::list<char>& lst, int n, int i)
     {
         largest = l;
     }
+    comparisons++;
 
     // If right child is larger than largest so far
     if (r < n && *std::next(lst.begin(), r) > *std::next(lst.begin(), largest))
     {
         largest = r;
     }
+    comparisons++;
 
     // If largest is not root
     if (largest != i) {
         std::swap(*std::next(lst.begin(), i), *std::next(lst.begin(), largest));
+        swaps++;
         // Recursively heapify the affected sub-tree
         heapify(lst, n, largest);
     }
@@ -108,8 +115,15 @@ void read(std::list<char>* data, const char* filename)
 int main()
 {
     std::list<char>* input = new std::list<char>();
-    read(input, "../Inputs/Input4.bin");
+    read(input, "../Inputs/Input2.bin");
+
+    auto start = std::chrono::high_resolution_clock::now();
     heapSort(*input, input->size());
+    auto end = std::chrono::high_resolution_clock::now();
+    std::chrono::duration<double> time_span = std::chrono::duration_cast<std::chrono::duration<double>>(end - start);
     print(input);
+    std::cout << "\nIt took me " << time_span.count() << " seconds.";
+    std::cout << "\nswaps " << swaps;
+    std::cout << "\ncomparisons " << comparisons << " seconds.";
     return 0;
 }
